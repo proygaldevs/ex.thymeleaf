@@ -1,32 +1,30 @@
 package com.galdevs.thymeleaf.company.model;
 
-import com.galdevs.thymeleaf.model.BaseEntity;
-import lombok.Data;
+import com.galdevs.thymeleaf.core.model.BaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE companies SET deleted = true WHERE id = ?")
-@Where(clause = "deleted = false")
 @Table(name = "companies")
-public class Company extends BaseEntity implements Serializable {
+@Where(clause = "deleted = false")
+@EqualsAndHashCode(callSuper = true)
+@SQLDelete(sql = "UPDATE companies SET deleted = true WHERE id = ?")
+public class Company extends BaseEntity {
 
-    private static final long serialVersionUID = -4036660832922611392L;
-
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "address")
     private String address;
 }
+

@@ -1,11 +1,12 @@
 package com.galdevs.thymeleaf.user.service;
 
 
+import com.galdevs.thymeleaf.user.dto.UserDto;
 import com.galdevs.thymeleaf.user.model.User;
 
 public interface UserService {
 
-    void save(User user);
+    void save(UserDto userDto);
 
-    User findByEmail(String email);
+    User findByUsername(String username);
 }

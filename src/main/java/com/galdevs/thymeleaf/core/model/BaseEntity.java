@@ -1,8 +1,9 @@
-package com.galdevs.thymeleaf.model;
+package com.galdevs.thymeleaf.core.model;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,9 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
@@ -22,25 +26,17 @@ public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private Timestamp createdAt;
+    protected LocalDateTime createdAt;
 
-    @Column(name = "created_by", updatable = false)
-    private String createdBy;
-
-    @Column(name = "deleted")
-    private Boolean deleted;
+    protected boolean deleted;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
+    protected LocalDateTime updatedAt;
 }
 
 
