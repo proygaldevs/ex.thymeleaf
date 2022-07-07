@@ -31,7 +31,7 @@ public class SecurityController {
     }
 
     @PostMapping("/signin")
-    public String registration(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult) {
+    public String signin(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {

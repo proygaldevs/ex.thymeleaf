@@ -2,6 +2,8 @@ package com.galdevs.thymeleaf.user.model;
 
 import com.galdevs.thymeleaf.company.model.Company;
 import com.galdevs.thymeleaf.core.model.BaseEntity;
+import com.galdevs.thymeleaf.core.model.eunms.Gender;
+import com.galdevs.thymeleaf.core.model.eunms.Status;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +12,8 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,7 +39,8 @@ public class User extends BaseEntity {
     @Column(name = "last_name_two")
     private String lastNameTwo;
 
-    private String gender;
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "id_number")
     private String idNumber;
@@ -50,6 +55,9 @@ public class User extends BaseEntity {
     private String username;
 
     private String password;
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
