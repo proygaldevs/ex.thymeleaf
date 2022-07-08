@@ -29,15 +29,19 @@
                 List
             </div>
             <div class="card-body">
-                <div class="col-md-6 mb-1">
-                    <div class="input-group mb-3">
-                        <form th:action="@{/users}" method="get" class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i data-feather="search"></i></span>
-                            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                   aria-describedby="button-addon2" name="username" th:value="${username}">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
-                        </form>
-
+                <div class="col-md-8 mb-1">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form th:action="@{/users}" method="get" class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i data-feather="search"></i></span>
+                                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                       aria-describedby="button-addon2" name="username" th:value="${username}">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <a th:href="@{/users/create}" class="btn btn-primary">Create</a>
+                        </div>
                     </div>
                 </div>
                 <table class='table table-striped' id="table1">
@@ -62,10 +66,10 @@
                             <span class="badge bg-success" th:text="${#strings.capitalizeWords(user.status)}"></span>
                         </td>
                         <td>
-                            <a th:href="@{'/users/update'}" class="btn alert-light-info">Editar</a>
+                            <a th:href="@{'/users/' + ${user.username} + '/update'}" class="btn btn-dark">Editar</a>
                         </td>
                         <td>
-                            <a th:href="@{'/users/' + ${user.username}}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{'/users/' + ${user.username} + '/delete'}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     </tbody>

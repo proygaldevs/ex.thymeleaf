@@ -8,52 +8,100 @@
 <body>
 <div class="card" layout:fragment="content">
     <div class="card-header">
-        <h4 class="card-title">Vertical Form</h4>
+        <h4 class="card-title">Update user</h4>
     </div>
     <div class="card-content">
         <div class="card-body">
-            <form class="form form-vertical">
+            <form class="form form-vertical" th:action="@{'/users/' + ${user.username} + '/update'}" method="post" th:object="${user}">
                 <div class="form-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="first-name-vertical">First Name</label>
-                                <input type="text" id="first-name-vertical" class="form-control" name="fname"
-                                       placeholder="First Name">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" class="form-control" name="first-name"
+                                       placeholder="First Name" th:value="${user.firstName}" th:field="*{firstName}">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="email-id-vertical">Email</label>
-                                <input type="email" id="email-id-vertical" class="form-control" name="email-id"
-                                       placeholder="Email">
+                                <label for="second-name">Second Name</label>
+                                <input type="text" id="second-name" class="form-control" name="second-name"
+                                       placeholder="Second Name" th:value="${user.secondName}" th:field="*{secondName}">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="contact-info-vertical">Mobile</label>
-                                <input type="number" id="contact-info-vertical" class="form-control" name="contact"
-                                       placeholder="Mobile">
+                                <label for="second-name">Lastname</label>
+                                <input type="text" id="lastname" class="form-control" name="lastname"
+                                       placeholder="Lastname" th:value="${user.lastNameOne}" th:field="*{lastNameOne}">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="password-vertical">Password</label>
-                                <input type="password" id="password-vertical" class="form-control" name="contact"
-                                       placeholder="Password">
+                                <label for="gender">Gender</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="gender" th:field="*{gender}">
+                                        <option value="0">Select option</option>
+                                        <option th:value="'FEMALE'" th:text="Female"></option>
+                                        <option th:value="'MALE'" th:text="Male"></option>
+                                    </select>
+                                </fieldset>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class='form-check'>
-                                <div class="checkbox">
-                                    <input type="checkbox" id="checkbox3" class='form-check-input' checked>
-                                    <label for="checkbox3">Remember Me</label>
-                                </div>
+                            <div class="form-group">
+                                <label for="id-type">ID type</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="id-type" th:field="*{idType}">
+                                        <option value="0">Select option</option>
+                                        <option th:value="'DNI'" th:text="DNI"></option>
+                                        <option th:value="'PP'" th:text="Passport"></option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id-number">ID Number</label>
+                                <input type="text" id="id-number" class="form-control" name="id-number"
+                                       placeholder="ID Number" th:value="${user.idNumber}" th:field="*{idNumber}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" name="email" placeholder="Email"
+                                       th:value="${user.email}" th:field="*{email}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="cellphone">Mobile</label>
+                                <input type="number" id="cellphone" class="form-control" name="cellphone"
+                                       placeholder="Mobile" th:value="${user.cellphone}" th:field="*{cellphone}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" class="form-control" name="username"
+                                       placeholder="Username" th:value="${user.username}" th:field="*{username}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="status" th:field="*{status}">
+                                        <option th:value="'ACTIVE'" th:text="Active"></option>
+                                        <option th:value="'INACTIVE'" th:text="Inactive"></option>
+                                    </select>
+                                </fieldset>
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
-                            <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">Update</button>
+                            <a th:href="@{/users}" class="btn btn-danger mr-1 mb-1">Cancelar</a>
                         </div>
                     </div>
                 </div>

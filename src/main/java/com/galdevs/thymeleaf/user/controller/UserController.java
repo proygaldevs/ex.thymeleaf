@@ -33,26 +33,39 @@ public class UserController {
         return "/pages/user/list";
     }
 
-    @GetMapping("/{username}")
+/*    @GetMapping("/{username}")
     public String findByUsername(@PathVariable String username) {
         userService.deleteByUsername(username);
 
         return "/pages/user/list";
-    }
+    }*/
 
-    @PostMapping
-    public String create(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult) {
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("user", new UserDto());
+
         return "/pages/user/create";
     }
 
-    @GetMapping("/update")
-    public String update(Model model, String username) {
+    @PostMapping("/create")
+    public String create(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult) {
+        userService.save(userForm);
+
+        return "/pages/user/list";
+    }
+
+    @GetMapping("/{username}/update")
+    public String update(Model model, @PathVariable String username) {
+        model.addAttribute("user", userService.findByUsername(username));
+
         return "/pages/user/update";
     }
 
-    @PostMapping("/{username}")
-    public String update(@ModelAttribute("userForm") UserDto userForm, @PathVariable String username, BindingResult bindingResult) {
-        return "/pages/user/update";
+    @PostMapping("/{username}/update")
+    public String update(@ModelAttribute("user") UserDto user, @PathVariable String username, BindingResult bindingResult) {
+        userService.update(username, user);
+
+        return "/pages/user/list";
     }
 
     @GetMapping("/{username}/delete")

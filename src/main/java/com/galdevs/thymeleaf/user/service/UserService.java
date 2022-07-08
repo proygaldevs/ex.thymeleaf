@@ -17,4 +17,6 @@ public interface UserService {
     List<UserBasicDto> findAll();
 
     void deleteByUsername(String username);
+
+    void update(String username, UserDto userDto);
 }

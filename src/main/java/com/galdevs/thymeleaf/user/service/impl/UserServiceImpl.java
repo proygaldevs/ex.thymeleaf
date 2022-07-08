@@ -10,6 +10,7 @@ import com.galdevs.thymeleaf.user.model.User;
 import com.galdevs.thymeleaf.user.repository.UserRepository;
 import com.galdevs.thymeleaf.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +59,19 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteByUsername(String username) {
         userRepository.deleteUserByUsername(username);
+    }
+
+    @Override
+    public void update(String username, UserDto userDto) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            BeanUtils.copyProperties(userDto, user, "password");
+            //TODO ELIMINAR Company
+            Company company = new Company();
+            company.setId(1L);
+            user.setCompany(company);
+            userRepository.save(user);
+        }
+
     }
 }

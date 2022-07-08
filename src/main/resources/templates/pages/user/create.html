@@ -1,10 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/dashboard}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<div class="card" layout:fragment="content">
+    <div class="card-header">
+        <h4 class="card-title">Create user</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <form class="form form-vertical" th:action="@{/users/create}" method="post" th:object="${user}">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" class="form-control" name="first-name"
+                                       placeholder="First Name" th:field="*{firstName}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="second-name">Second Name</label>
+                                <input type="text" id="second-name" class="form-control" name="second-name"
+                                       placeholder="Second Name" th:field="*{secondName}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="second-name">Lastname</label>
+                                <input type="text" id="lastname" class="form-control" name="lastname"
+                                       placeholder="Lastname" th:field="*{lastNameOne}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="gender" th:field="*{gender}">
+                                        <option value="0">Select option</option>
+                                        <option th:value="'FEMALE'" th:text="Female"></option>
+                                        <option th:value="'MALE'" th:text="Male"></option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id-type">ID type</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="id-type" th:field="*{idType}">
+                                        <option value="0">Select option</option>
+                                        <option th:value="'DNI'" th:text="DNI"></option>
+                                        <option th:value="'PP'" th:text="Passport"></option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id-number">ID Number</label>
+                                <input type="text" id="id-number" class="form-control" name="id-number"
+                                       placeholder="ID Number" th:field="*{idNumber}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" name="email" placeholder="Email"
+                                       th:field="*{email}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="cellphone">Mobile</label>
+                                <input type="number" id="cellphone" class="form-control" name="cellphone"
+                                       placeholder="Mobile" th:field="*{cellphone}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" class="form-control" name="username"
+                                       placeholder="Username" th:field="*{username}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="status" th:field="*{status}">
+                                        <option th:value="'ACTIVE'" th:text="Active"></option>
+                                        <option th:value="'INACTIVE'" th:text="Inactive"></option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <p>Temporal password</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password-column">Password</label>
+                                <input type="password" id="password-column" class="form-control"
+                                       name="password-column" placeholder="Password" th:field="*{password}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="confirm-password-column">Confirm password</label>
+                                <input type="password" id="confirm-password-column" class="form-control"
+                                       name="confirm-password-column" placeholder="Confirm password"  th:field="*{passwordConfirm}">
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">Create</button>
+                            <a th:href="@{/users}" class="btn btn-danger mr-1 mb-1">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
