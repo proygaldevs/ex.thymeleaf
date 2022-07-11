@@ -1,5 +1,6 @@
 package com.galdevs.thymeleaf.user.dto;
 
+import com.galdevs.thymeleaf.company.dto.CompanyDto;
 import com.galdevs.thymeleaf.core.model.eunms.Gender;
 import com.galdevs.thymeleaf.core.model.eunms.Status;
 import lombok.AllArgsConstructor;
@@ -26,4 +27,5 @@ public class UserDto {
     private Status status;
     private String password;
     private String passwordConfirm;
+    private CompanyDto company;
 }

@@ -19,4 +19,6 @@ public interface UserService {
     void deleteByUsername(String username);
 
     void update(String username, UserDto userDto);
+
+    Integer countUsersByCompany(Long companyId);
 }

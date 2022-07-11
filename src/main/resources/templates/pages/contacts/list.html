@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/dashboard}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="section">
+        <div class="card-body">
+            <div class="col-md-8 mb-1">
+                <div class="row">
+                    <div class="col-md-8">
+                        <form th:action="@{/users}" method="get" class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i data-feather="search"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                   aria-describedby="button-addon2" name="username" th:value="${username}">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <a th:href="@{/users/create}" class="btn btn-primary">Create</a>
+                    </div>
+                </div>
+            </div>
+            <table class='table table-striped' id="table1">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+                <tbody id="contact-list">
+                <tr th:each="contact: ${contacts}">
+                    <td th:text="${contact.name}"/>
+                    <td th:text="${contact.email}"/>
+                    <td th:text="${contact.phone}"/>
+                    <td th:text="${contact.address}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

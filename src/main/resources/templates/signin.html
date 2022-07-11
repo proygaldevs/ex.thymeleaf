@@ -35,9 +35,27 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
+                                        <label for="second-name-column">Second Name</label>
+                                        <input type="text" id="second-name-column" class="form-control"
+                                               name="sname-column" th:field="*{secondName}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
                                         <label for="last-name-column">Last Name</label>
                                         <input type="text" id="last-name-column" class="form-control"
                                                name="lname-column" th:field="*{lastNameOne}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="company">Company</label>
+                                        <fieldset class="form-group">
+                                            <select class="form-select" id="company" th:field="*{company.id}">
+                                                <option value="" selected>Select option</option>
+                                                <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+                                            </select>
+                                        </fieldset>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">

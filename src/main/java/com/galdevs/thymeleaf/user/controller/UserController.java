@@ -1,7 +1,7 @@
 package com.galdevs.thymeleaf.user.controller;
 
-
-import com.galdevs.thymeleaf.user.dto.UserBasicDto;
+import com.galdevs.thymeleaf.company.dto.CompanyDto;
+import com.galdevs.thymeleaf.company.service.CompanyService;
 import com.galdevs.thymeleaf.user.dto.UserDto;
 import com.galdevs.thymeleaf.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+    private final CompanyService companyService;
 
     @GetMapping
     public String findByUsername(Model model, String username) {
@@ -33,16 +34,11 @@ public class UserController {
         return "/pages/user/list";
     }
 
-/*    @GetMapping("/{username}")
-    public String findByUsername(@PathVariable String username) {
-        userService.deleteByUsername(username);
-
-        return "/pages/user/list";
-    }*/
-
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("user", new UserDto());
+        model.addAttribute("company", new CompanyDto());
+        model.addAttribute("companies", companyService.findAll());
 
         return "/pages/user/create";
     }
@@ -74,6 +70,4 @@ public class UserController {
 
         return "/pages/user/list";
     }
-
-
 }

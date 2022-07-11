@@ -1,5 +1,7 @@
 package com.galdevs.thymeleaf.core.controller;
 
+import com.galdevs.thymeleaf.company.dto.CompanyDto;
+import com.galdevs.thymeleaf.company.service.CompanyService;
 import com.galdevs.thymeleaf.core.service.SecurityService;
 import com.galdevs.thymeleaf.user.dto.UserDto;
 import com.galdevs.thymeleaf.user.service.UserService;
@@ -20,12 +22,15 @@ public class SecurityController {
     private final UserService userService;
     private final SecurityService securityService;
     private final UserValidator userValidator;
+    private final CompanyService companyService;
 
     @GetMapping("/signin")
     public String signIn(Model model) {
         if (securityService.isAuthenticated()) return "redirect:/";
 
         model.addAttribute("userForm", new UserDto());
+        model.addAttribute("company", new CompanyDto());
+        model.addAttribute("companies", companyService.findAll());
 
         return "signin";
     }
@@ -61,7 +66,8 @@ public class SecurityController {
     }
 
     @RequestMapping("/home")
-    public String loginSubmit() {
+    public String loginSubmit(Model model) {
+        model.addAttribute("usersCompanies", companyService.getCompanyUsers());
         return "/pages/landing-page";
     }
 }

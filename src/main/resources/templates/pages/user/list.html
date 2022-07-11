@@ -52,6 +52,7 @@
                         <th>Username</th>
                         <th>Phone</th>
                         <th>Status</th>
+                        <th>Contacts</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -64,6 +65,10 @@
                         <td th:text="${user.cellphone}"/>
                         <td>
                             <span class="badge bg-success" th:text="${#strings.capitalizeWords(user.status)}"></span>
+                        </td>
+                        </td>
+                        <td>
+                            <a class="btn btn-secondary" data-toggle="modal" data-target="#inlineForm" onclick="loadContacts()">View contacts</a>
                         </td>
                         <td>
                             <a th:href="@{'/users/' + ${user.username} + '/update'}" class="btn btn-dark">Editar</a>

@@ -99,6 +99,17 @@
                                 </fieldset>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <fieldset class="form-group">
+                                    <select class="form-select" id="company" th:field="*{company.id}">
+                                        <option value="" selected>Select option</option>
+                                        <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
                         <p>Temporal password</p>
                         <div class="col-md-6">
                             <div class="form-group">

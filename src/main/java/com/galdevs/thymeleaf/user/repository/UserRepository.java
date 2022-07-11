@@ -1,5 +1,6 @@
 package com.galdevs.thymeleaf.user.repository;
 
+import com.galdevs.thymeleaf.core.model.eunms.Status;
 import com.galdevs.thymeleaf.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void deleteUserByUsername(String username);
 
     boolean existsByUsername(String username);
+
+    Integer countUsersByCompanyIdAndStatus(Long companyId, Status status);
 }

@@ -1,3 +1,31 @@
+function getCompanies(){
+  const text = JSON.parse(document.getElementById('user-companies').value);
+  const list = [];
+  for (var key in text){
+    list.push(key);
+  }
+  return list;
+}
+
+function getUsers(){
+  const text = JSON.parse(document.getElementById('user-companies').value);
+  const list = [];
+  for (var key in text){
+    list.push(text[key]);
+  }
+  return list;
+}
+
+function getMaxUser() {
+  const text = JSON.parse(document.getElementById('user-companies').value);
+  let maxNumber = 0;
+  for (var key in text){
+    if (maxNumber <= text[key]) {
+      maxNumber = text[key];
+    }
+  }
+  return Math.round((maxNumber * 0.2) + maxNumber);
+}
 
 var chartColors = {
   red: 'rgb(255, 99, 132)',
@@ -31,7 +59,7 @@ var config1 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     layout: {
       padding: {
         left: -10,
@@ -236,7 +264,7 @@ var config4 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     layout: {
       padding: {
         left: -10,
@@ -300,7 +328,7 @@ Chart.helpers.drawRoundedTopRectangle = function(ctx, x, y, width, height, radiu
   ctx.lineTo(x + width, y + height);
   // bottom left corner
   ctx.lineTo(x, y + height);
-  // top left	
+  // top left
   ctx.lineTo(x, y + radius);
   ctx.quadraticCurveTo(x, y, x + radius, y);
   ctx.closePath();
@@ -361,10 +389,10 @@ Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
     var barWidth = Math.abs(left - right);
     var roundness = this._chart.config.options.barRoundness || 0.5;
     var radius = barWidth * roundness * 0.5;
-    
+
     // keep track of the original top of the bar
     var prevTop = top;
-    
+
     // move the top down so there is room to draw the rounded top
     top = prevTop + radius;
     var barRadius = top - prevTop;
@@ -397,19 +425,11 @@ var ctxBar = document.getElementById("bar").getContext("2d");
 var myBar = new Chart(ctxBar, {
   type: 'bar',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    labels: getCompanies(),
     datasets: [{
       label: 'Students',
       backgroundColor: [chartColors.grey, chartColors.grey, chartColors.grey, chartColors.grey, chartColors.info, chartColors.blue, chartColors.grey],
-      data: [
-        5, 
-        10, 
-        30, 
-        40, 
-        35, 
-        55, 
-        15, 
-      ]
+      data: getUsers(),
     }]
   },
   options: {
@@ -417,7 +437,7 @@ var myBar = new Chart(ctxBar, {
     barRoundness: 1,
     title: {
       display: false,
-      text: "Chart.js - Bar Chart with Rounded Tops (drawRoundedTopRectangle Method)"
+      text: "Active clients"
     },
     legend: {
       display:false
@@ -426,7 +446,7 @@ var myBar = new Chart(ctxBar, {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          suggestedMax: 40 + 20,
+          suggestedMax: getMaxUser(),
           padding: 10,
         },
         gridLines: {
@@ -434,11 +454,11 @@ var myBar = new Chart(ctxBar, {
         }
       }],
       xAxes: [{
-            gridLines: {
-                display:false,
-                drawBorder: false
-            }
-        }]
+        gridLines: {
+          display:false,
+          drawBorder: false
+        }
+      }]
     }
   }
 });
@@ -485,11 +505,3 @@ var radialBarsOptions = {
 };
 var radialBars = new ApexCharts(document.querySelector("#radialBars"), radialBarsOptions);
 radialBars.render();
-let ctx1 = document.getElementById("canvas1").getContext("2d");
-let ctx2 = document.getElementById("canvas2").getContext("2d");
-let ctx3 = document.getElementById("canvas3").getContext("2d");
-let ctx4 = document.getElementById("canvas4").getContext("2d");
-var lineChart1 = new Chart(ctx1, config1);
-var lineChart2 = new Chart(ctx2, config2);
-var lineChart3 = new Chart(ctx3, config3);
-var lineChart4 = new Chart(ctx4, config4);

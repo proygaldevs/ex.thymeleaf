@@ -31,10 +31,6 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toEntity(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         user.setStatus(Status.ACTIVE);
-        //TODO ELIMINAR Company
-        Company company = new Company();
-        company.setId(1L);
-        user.setCompany(company);
         userRepository.save(user);
     }
 
@@ -66,12 +62,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username);
         if (user != null) {
             BeanUtils.copyProperties(userDto, user, "password");
-            //TODO ELIMINAR Company
-            Company company = new Company();
-            company.setId(1L);
-            user.setCompany(company);
             userRepository.save(user);
         }
 
+    }
+
+    @Override
+    public Integer countUsersByCompany(Long companyId) {
+        return userRepository.countUsersByCompanyIdAndStatus(companyId, Status.ACTIVE);
     }
 }
